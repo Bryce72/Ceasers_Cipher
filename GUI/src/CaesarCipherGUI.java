@@ -17,19 +17,21 @@ public class CaesarCipherGUI extends JFrame {
 
         // South panel
         JPanel southPanel     = new JPanel(); //this is what will use the borderlayout
-        JLabel messageToInput = new JLabel("Type here to Encrypt or Decrypt a message: ");
+        JLabel messageToInput = new JLabel("Type here: ");
         JTextField userInput  = new JTextField(20); // this is where the user can actually input something
         //Encrypt and Decrypt buttons - In South Panel
         JButton addButton = new JButton("Add");
         JButton deleteButton = new JButton("Delete");
-        JButton displayAllButton = new JButton("Display All");
+        JButton encryptButton = new JButton("Encrypt");
+        JButton decryptButton = new JButton("Decrypt");
         JButton exitButton = new JButton("Exit");
         // Adding the Components to the South Panel
         southPanel.add(messageToInput);
         southPanel.add(userInput);
         southPanel.add(addButton);
         southPanel.add(deleteButton);
-        southPanel.add(displayAllButton);
+        southPanel.add(encryptButton);
+        southPanel.add(decryptButton);
         southPanel.add(exitButton);
         //Then adding the southPanel to the South Region
         add(southPanel, BorderLayout.SOUTH);

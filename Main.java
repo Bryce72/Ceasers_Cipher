@@ -6,6 +6,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
+        /*
         // making my dates
         Date thisWeekend = new Date(30, 3, 2024);
         Date nextYear = new Date(30, 3, 2025);
@@ -134,5 +135,15 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+         */
+
+
+        CryptographyWork caesarsCipher = new CaesarsCipher();
+        String message = "Hello";
+        String message2 = "zzz";
+
+
+        String encrypted = caesarsCipher.encrypt(message2);
+        System.out.println("hello becomes:  " + encrypted);
     }
 }
