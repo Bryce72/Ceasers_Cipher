@@ -20,18 +20,24 @@ public class CaesarCipherGUI extends JFrame {
         JLabel messageToInput = new JLabel("Type here to Encrypt or Decrypt a message: ");
         JTextField userInput  = new JTextField(20); // this is where the user can actually input something
         //Encrypt and Decrypt buttons - In South Panel
-        JButton encryptButton = new JButton("Encrypt");
-        JButton decryptButton = new JButton("Decrypt");
+        JButton addButton = new JButton("Add");
+        JButton deleteButton = new JButton("Delete");
+        JButton displayAllButton = new JButton("Display All");
+        JButton exitButton = new JButton("Exit");
         // Adding the Components to the South Panel
         southPanel.add(messageToInput);
         southPanel.add(userInput);
-        southPanel.add(encryptButton);
-        southPanel.add(decryptButton);
+        southPanel.add(addButton);
+        southPanel.add(deleteButton);
+        southPanel.add(displayAllButton);
+        southPanel.add(exitButton);
         //Then adding the southPanel to the South Region
         add(southPanel, BorderLayout.SOUTH);
 
+
+
         // Center Panel
-        JTextArea textDisplay = new JTextArea(10, 30);
+        JTextArea textDisplay = new JTextArea(10,2);
         textDisplay.setEditable(false); // this is so it cannot be edited
         JScrollPane scrollBar = new JScrollPane(textDisplay); // adding the scroll bar functionality
         add(scrollBar, BorderLayout.CENTER);
