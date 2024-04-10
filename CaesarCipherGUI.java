@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
+import java.util.List;
 
 
 public class CaesarCipherGUI extends JFrame {
@@ -14,7 +15,7 @@ public class CaesarCipherGUI extends JFrame {
     private JButton     deleteButton;
     private JButton     encryptButton;
     private JButton     decryptButton;
-    private JButton     isMyMessageWeakButton;
+    private JButton     searchButton;
     private JButton     exitButton;
     private JList       textDisplay;
     private JScrollPane scrollBar;
@@ -55,7 +56,7 @@ public class CaesarCipherGUI extends JFrame {
         deleteButton = new JButton("Delete");
         encryptButton = new JButton("Encrypt");
         decryptButton = new JButton("Decrypt");
-        isMyMessageWeakButton = new JButton("How Weak is My Message?");
+        searchButton = new JButton("Search");
         exitButton = new JButton("Exit");
 
         // Adding the Components to the South Panel
@@ -65,7 +66,7 @@ public class CaesarCipherGUI extends JFrame {
         southPanel.add(deleteButton);
         southPanel.add(encryptButton);
         southPanel.add(decryptButton);
-        southPanel.add(isMyMessageWeakButton);
+        southPanel.add(searchButton);
         southPanel.add(exitButton);
         //Then adding the southPanel to the South Region
         add(southPanel, BorderLayout.SOUTH);
@@ -89,8 +90,11 @@ public class CaesarCipherGUI extends JFrame {
         addButton.addActionListener(AddItemAction());
         encryptButton.addActionListener(encryptAction());
         decryptButton.addActionListener(decryptAction());
+        searchButton.addActionListener(searchAction());
         exitButton.addActionListener(CloseAction());
         deleteButton.addActionListener(DeleteItem());
+
+
 
 
         // Initially set to false until it makes sense for them to be activated.
@@ -243,6 +247,59 @@ public class CaesarCipherGUI extends JFrame {
     }
 
 
+
+
+    /**
+     * This is where my filter and fold is demonstrated.
+     *
+     * User has the option to type in a word and click the "Search" button. It will display how many times the word is found.
+     *
+     * Notice I am not really doing much with filter it self. This was implemented before fold and my original intention was to display
+     * the filtered words in the text display but that turned out to be ugly and this has some use case.
+     *
+     *
+     * What is the use case in finding out how many times a word occurs? Well it will show a pattern in the encrypted text
+     * making the message more vulnerable to being decrypted by unwanted people.
+     *
+     * @return
+     */
+
+    public ActionListener searchAction()
+    {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(messageList.getListSize() > 0)
+                {
+                    if(IsCleartext) {
+
+                        CaesarsCipher encryptedMessageList = new CaesarsCipher();
+                        String keyword = userInput.getText().toLowerCase();
+                        Listuse<String> filteredMessageList =  messageList.filter(message -> message.toLowerCase(). contains(keyword)); //making a new linked list of the filtered
+                        // just adding this here because it will go blank if you search something not found. this solves that
+                        if(keyword.isEmpty() || filteredMessageList.getListSize() == 0)
+                        {
+                            JOptionPane.showMessageDialog(null, "Oh no, nothing was found.");  //this was fun to make
+                        }else
+                        {
+                            DefaultListModel filteredWords = new DefaultListModel<>();
+                            filteredMessageList.forEach(filteredWords::addElement);
+                            int occurrences = filteredMessageList.fold(0, (count, message) -> message.toLowerCase().contains(keyword) ? count + 1 : count);
+                            JOptionPane.showMessageDialog(null, "The word " + keyword + " is found " + occurrences + " times.");
+                            //textDisplay.setModel(filteredWords);
+                        }
+
+                    }else
+                    {
+                        JOptionPane.showMessageDialog(null, "Click on decrypt. Its too confusing searching for a word thats in its encryptions form.");  //this was fun to make
+                    }
+
+                }
+
+
+            }
+        };
+    }
 
 
 

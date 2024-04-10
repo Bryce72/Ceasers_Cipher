@@ -44,4 +44,6 @@ public class CaesarsCipher implements CryptographyWork{
         }
         return shiftedMessage.toString();
     }
+
+
 }
