@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
-import java.util.List;
 
 
 public class CaesarCipherGUI extends JFrame {
@@ -25,6 +24,10 @@ public class CaesarCipherGUI extends JFrame {
     private Listuse<String> messageList = new EmptyList<>();
 
     private boolean IsCleartext;
+
+    //cool add ons
+    private JLabel matrixGIF;
+    private ImageIcon imageIcon;
 
 
 
@@ -79,6 +82,15 @@ public class CaesarCipherGUI extends JFrame {
         scrollBar = new JScrollPane(textDisplay); // adding the scroll bar functionality
         add(scrollBar, BorderLayout.CENTER);
 
+        //for the gif
+        matrixGIF = new JLabel(new ImageIcon("matrixGIF.gif"));
+        matrixGIF.setVisible(false); //only want this true when encrypt is clicked intially
+        getContentPane().add(matrixGIF, BorderLayout.NORTH); // all i need to do is ste visibility to true and then switch it off when done
+        //Timer timer = new Timer(3000, encryptAction());
+
+
+        imageIcon = new ImageIcon("cryptographyIcon.png");
+        setIconImage(imageIcon.getImage());
         pack(); // helps make it look nice
         setLocationRelativeTo(null); //cool way to make sure the application opens in the middle of the screen
         //This is to make the application visible
@@ -93,6 +105,7 @@ public class CaesarCipherGUI extends JFrame {
         searchButton.addActionListener(searchAction());
         exitButton.addActionListener(CloseAction());
         deleteButton.addActionListener(DeleteItem());
+
 
 
 
@@ -188,6 +201,8 @@ public class CaesarCipherGUI extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 if(messageList.getListSize() > 0)
                 {
+                    matrixGIF.setVisible(true);
+                    new Timer (1000, e -> matrixGIF.setVisible(false)).start(); // funny addition
                     if(IsCleartext) {
                         CaesarsCipher encryptedMessageList = new CaesarsCipher();
                         messageList = messageList.map(messageList -> encryptedMessageList.encrypt(messageList));
@@ -260,6 +275,10 @@ public class CaesarCipherGUI extends JFrame {
      *
      * What is the use case in finding out how many times a word occurs? Well it will show a pattern in the encrypted text
      * making the message more vulnerable to being decrypted by unwanted people.
+     *
+     *
+     * ----Note if you search for "ee" and the word "leet" is present. It will count that as a word.
+     * ---- meaning it searches for matched letters in sequence not specifically words itself.
      *
      * @return
      */
