@@ -14,6 +14,7 @@ public class CaesarCipherGUI extends JFrame {
     private JButton     deleteButton;
     private JButton     encryptButton;
     private JButton     decryptButton;
+    private JButton     isMyMessageWeakButton;
     private JButton     exitButton;
     private JList       textDisplay;
     private JScrollPane scrollBar;
@@ -54,6 +55,7 @@ public class CaesarCipherGUI extends JFrame {
         deleteButton = new JButton("Delete");
         encryptButton = new JButton("Encrypt");
         decryptButton = new JButton("Decrypt");
+        isMyMessageWeakButton = new JButton("How Weak is My Message?");
         exitButton = new JButton("Exit");
 
         // Adding the Components to the South Panel
@@ -63,6 +65,7 @@ public class CaesarCipherGUI extends JFrame {
         southPanel.add(deleteButton);
         southPanel.add(encryptButton);
         southPanel.add(decryptButton);
+        southPanel.add(isMyMessageWeakButton);
         southPanel.add(exitButton);
         //Then adding the southPanel to the South Region
         add(southPanel, BorderLayout.SOUTH);
@@ -79,9 +82,10 @@ public class CaesarCipherGUI extends JFrame {
         setLocationRelativeTo(null); //cool way to make sure the application opens in the middle of the screen
         //This is to make the application visible
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Properly closes progra
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Properly closes program
 
 
+        //Adding the buttons to the frame
         addButton.addActionListener(AddItemAction());
         encryptButton.addActionListener(encryptAction());
         decryptButton.addActionListener(decryptAction());
@@ -89,14 +93,20 @@ public class CaesarCipherGUI extends JFrame {
         deleteButton.addActionListener(DeleteItem());
 
 
-
+        // Initially set to false until it makes sense for them to be activated.
         decryptButton.setEnabled(false);
         deleteButton.setEnabled(false);
     }
 
 
     /**
-     * This method relates to the Add Button
+     * This method relates to the Add Button.
+     *
+     * Need to click on "Add" button for this to initiate.
+     *
+     * Will only work if user inputs text of atleast 1 character.
+     *
+     * It will also add each element from the words list to the "messageList" which is the singly linked list applied.
      * @return
      */
     public ActionListener AddItemAction()
@@ -163,7 +173,8 @@ public class CaesarCipherGUI extends JFrame {
     }
 
     /**
-     * This is the encrypt action button. Will only work when IsClearText is set to true
+     * This is the encrypt action button. Will only work when IsClearText is set to true.
+     * Uses foreach method to update the encrypted message from the linkedlist to the "words" list that is displayed in the text GUI
      * @return
      */
     public ActionListener encryptAction()
@@ -193,6 +204,17 @@ public class CaesarCipherGUI extends JFrame {
         };
     }
 
+
+    /**
+     * This is the action method applied to the decrypt button.
+     * Will only run if IsClearText is False(meaning it is in encrypted text) and if the messagelist has atleast one node.
+     *
+     * As with encrypt action it will clear the words list that is displayed and use the foreach method from the linkedlist to update it but
+     * with the decrypted text.
+     *
+     * @return
+     */
+
     public ActionListener decryptAction()
     {
         return new ActionListener() {
@@ -221,6 +243,16 @@ public class CaesarCipherGUI extends JFrame {
     }
 
 
+
+
+
+
+    /**
+     * Simple action method applied to the "Exit" button.
+     *
+     * Closes Program when "Exit" button is clicked.
+     * @return
+     */
 
     public ActionListener CloseAction()
     {

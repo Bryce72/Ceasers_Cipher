@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * This GUI was the initial phase of writing my first swift GUI. The refactored and improved/working GUI is in the parent directory!
+* */
 public class swingGUI {
 
 
