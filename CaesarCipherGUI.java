@@ -126,6 +126,13 @@ public class CaesarCipherGUI extends JFrame {
     }
 
 
+    /**
+     * This Deletes the item. If you look closely, you arent actually "deleting" a single item in the linked list.
+     * You are simply emplying the linked list out and reassigning what is in the word list to the linked list.
+     *
+     * -- Also note, the for loop makes sure the correct order that words is in copys over to the new messageList
+     * @return
+     */
     public ActionListener DeleteItem()
     {
         return new ActionListener() {
@@ -155,7 +162,10 @@ public class CaesarCipherGUI extends JFrame {
         };
     }
 
-
+    /**
+     * This is the encrypt action button. Will only work when IsClearText is set to true
+     * @return
+     */
     public ActionListener encryptAction()
     {
         return new ActionListener() {
