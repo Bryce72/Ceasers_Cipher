@@ -4,8 +4,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 public class NotEmptyList<T> implements Listuse<T> {
-    T head;
-    Listuse<T> tail;
+    private T head;
+    private Listuse<T> tail;
 
     NotEmptyList(T head, Listuse<T> tail) {
         this.head = head;
@@ -39,10 +39,7 @@ public class NotEmptyList<T> implements Listuse<T> {
 
     @Override
     public <R> R fold(R initial, BiFunction<R, T, R> accumulate) {
-        return this.tail.fold(
-                accumulate.apply(initial, head),
-                accumulate
-        );
+        return this.tail.fold(accumulate.apply(initial, head), accumulate);
     }
 
     @Override
